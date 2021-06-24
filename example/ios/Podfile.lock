@@ -1,0 +1,22 @@
+PODS:
+  - airwatch_socket_workaround (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - airwatch_socket_workaround (from `.symlinks/plugins/airwatch_socket_workaround/ios`)
+  - Flutter (from `Flutter`)
+
+EXTERNAL SOURCES:
+  airwatch_socket_workaround:
+    :path: ".symlinks/plugins/airwatch_socket_workaround/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  airwatch_socket_workaround: 71db78966259478f226e5ba6ec535a7b039a5b65
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1

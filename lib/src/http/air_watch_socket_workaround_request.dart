@@ -4,11 +4,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import '../air_watch_socket_workaround.dart';
 
-import '../airwatch_socket_workaround.dart';
-
-class HttpRequestBodyProviderFactory {
-  static HttpRequestBodyProvider build(ContentType contentType) {
+@visibleForTesting
+class ContentTypeBasedHttpRequestBodyProviderFactory
+    implements HttpRequestBodyProviderFactory {
+  HttpRequestBodyProvider build(ContentType contentType) {
     final primaryType = contentType.primaryType;
     final subType = contentType.subType;
 
@@ -36,11 +37,11 @@ class HttpRequestBodyProviderFactory {
 @visibleForTesting
 class MultipartBodyProvider implements HttpRequestBodyProvider {
   @override
-  Future<List<MultipartMessage>> getBody(BaseRequest request) async {
+  Future<String> getBody(BaseRequest request) async {
     if (request is MultipartRequest) {
       List<MultipartMessage> messages = [];
 
-      await Future.forEach<MultipartFile>(request.files, (file) async {
+      await Future.forEach(request.files, (file) async {
         final bytes = await file.finalize().toBytes();
         final contentType = ContentType.parse(file.contentType.mimeType);
 
@@ -48,7 +49,8 @@ class MultipartBodyProvider implements HttpRequestBodyProvider {
             contentType: contentType));
       });
 
-      return messages;
+      return jsonEncode(
+          messages.map((e) => e.toJson()).toList(growable: false));
     } else {
       throw ArgumentError('Provided request is not a valid Multipart one');
     }
@@ -56,7 +58,7 @@ class MultipartBodyProvider implements HttpRequestBodyProvider {
 
   @override
   Encoding getEncoding(BaseRequest request) {
-    throw UnimplementedError('not yet.. is this needed ?!');
+    return utf8;
   }
 }
 
@@ -153,6 +155,13 @@ class MultipartMessage {
     return MultipartMessage.fromString(field, jsonEncoded,
         contentType: contentType ?? ContentType.json);
   }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'length': length,
+        'contentType': contentType.value,
+        'data': data
+      };
 
   static MultipartMessage fromCodec<T>(
       String field, T value, Codec<T, List<int>> codec,

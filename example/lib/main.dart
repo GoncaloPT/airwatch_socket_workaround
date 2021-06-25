@@ -1,3 +1,4 @@
+import 'package:airwatch_socket_workaround_example/src/http_tryout_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -49,9 +50,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: HttpTryoutWidget(),
       ),
     );
   }

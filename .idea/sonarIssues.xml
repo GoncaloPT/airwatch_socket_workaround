@@ -13,6 +13,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/HttpTryoutWidget.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/http_tryout_widget.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/ios/Classes/AirWatchHttpWorkAround.swift">
           <value>
             <set />
@@ -83,12 +93,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/lib/src/http/air_watch_socket_workaround_impl.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/lib/src/http/air_watch_socket_workaround_request.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/lib/src/logger_factory.dart">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/lib/src/request_body_provider.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/lib/src/websocket/airwatch_websocket.dart">
           <value>
             <set />
           </value>
@@ -108,7 +133,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/test/src/http/air_watch_socket_workaround_test.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/tools/flutter/bin/cache/pkg/sky_engine/lib/_http/http_headers.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/tools/flutter/bin/cache/pkg/sky_engine/lib/core/errors.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/tools/flutter/bin/cache/pkg/sky_engine/lib/core/function.dart">
           <value>
             <set />
           </value>

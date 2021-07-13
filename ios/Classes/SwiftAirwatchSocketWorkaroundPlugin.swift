@@ -34,8 +34,12 @@ public class SwiftAirwatchSocketWorkaroundPlugin: NSObject, FlutterPlugin {
 
   class AirWatchWorkaroundSessionDelegate: NSObject, URLSessionDelegate, URLSessionWebSocketDelegate {
 
-      // URLSessionWebSocketTask doesn't seem to be able to tell if the it's closed or not....
-      var webSocketClosed = false;
+        // URLSessionWebSocketTask doesn't seem to be able to tell if the it's closed or not....
+        var onWebSocketCloseHandler: (() -> ())?;
+        
+        func setOnWebSocketClose(onWebSocketCloseHandler: (()-> ())? ) {
+            self.onWebSocketCloseHandler = onWebSocketCloseHandler;
+        }
 
       /*
        This method implemenents urlSession from URLSessionDelegate
@@ -51,7 +55,7 @@ public class SwiftAirwatchSocketWorkaroundPlugin: NSObject, FlutterPlugin {
        */
       func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
           os_log(" ===> socket connected <==== ",log: OSLog.airWatchWorkaroundWebSocketClient ,type: .error)
-          webSocketClosed = false
+          
 
       }
 
@@ -59,18 +63,19 @@ public class SwiftAirwatchSocketWorkaroundPlugin: NSObject, FlutterPlugin {
        Specialized urlSession for websocket disconnect event
        */
       func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-
-          webSocketClosed = true
           os_log(" ===> INFO socket disconnected from server side <==== ",log: OSLog.airWatchWorkaroundWebSocketClient,type: .info)
           os_log(" ===> socket disconnected from server side <==== ",log: OSLog.airWatchWorkaroundWebSocketClient,type: .error)
+        
+        if(onWebSocketCloseHandler != nil){
+                    onWebSocketCloseHandler!();
+        }
+        else{
+            os_log(" ===>  socket disconnected BUT NO onWebSocketCloseHandler defined!!! <==== ",log: OSLog.airWatchWorkaroundWebSocketClient,type: .error);
+        }
 
       }
 
-      func isWebSocketClosed() -> Bool{
-          os_log(" ===> isWebSocketClosed called, value is %@",log: OSLog.airWatchWorkaroundWebSocketClient,type: .error, String(describing: webSocketClosed))
-          return webSocketClosed;
-      }
-
+      
   }
 
 

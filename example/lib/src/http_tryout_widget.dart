@@ -92,21 +92,22 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    direction: Axis.horizontal,
-                    spacing: 8.0,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      Text(
-                        'response is',
-                        style: theme.textTheme.headline3,
-                      ),
-                      Text('${snapshot.data}'),
-                    ],
-                  ),
-                )
+                if (snapshot.hasData)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 8.0,
+                      alignment: WrapAlignment.center,
+                      children: [
+                        Text(
+                          'response is',
+                          style: theme.textTheme.headline3,
+                        ),
+                        Text('${snapshot.data}'),
+                      ],
+                    ),
+                  )
               ],
             ),
           );

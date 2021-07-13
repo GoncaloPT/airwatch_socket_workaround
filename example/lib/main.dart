@@ -45,12 +45,45 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  text: 'HTTP',
+                ),
+                Tab(
+                  text: 'MULTIPART',
+                ),
+                Tab(
+                  text: 'WEBSOCKET',
+                ),
+              ],
+            ),
+            title: Text('Tabs Demo'),
+          ),
+          body: TabBarView(
+            children: [
+              HttpTryoutWidget(),
+              Center(
+                child: Text(
+                  'TODO',
+                  style: theme.textTheme.headline2,
+                ),
+              ),
+              Center(
+                child: Text(
+                  'TODO',
+                  style: theme.textTheme.headline2,
+                ),
+              ),
+            ],
+          ),
         ),
-        body: HttpTryoutWidget(),
       ),
     );
   }

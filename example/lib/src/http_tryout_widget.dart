@@ -15,31 +15,30 @@ class HttpTryoutWidget extends StatefulWidget {
 class _HttpTryoutWidgetState extends State<HttpTryoutWidget> {
   var responseText = '';
   var endpoint = 'https://jsonplaceholder.typicode.com/todos/1';
-  var wsEndpoint = 'wss://echo.websocket.org';
+  var wsEndpoint = 'https://httpbin.org/anything';
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SendHttpRequestWidget('Http request',wsEndpoint,),
-        /*buildHttpGetWidget('Websocket echo', (endpoint) async {
-          var session =
-              await AirWatchWorkAroundFactory.getInstanceSocketSession(
-                  endpoint);
-          var stream = session.receiveBroadcastStream();
-          session.send('hello');
-          return stream;
-        }),*/
-      ],
+    return SendHttpRequestWidget(
+      (String endpoint) async {
+        AirWatchHttpWorkAround httpWorkAroundClient =
+            AirWatchWorkAroundFactory.getInstance();
+        var request = dartHttp.Request("GET", Uri.parse(endpoint))
+          ..headers.addAll({'content-type': 'application/json'});
+        var response = await httpWorkAroundClient.doRequest(request);
+
+        return '${response.body}';
+      },
+      wsEndpoint,
     );
   }
 }
 
 class SendHttpRequestWidget extends StatefulWidget {
-  final String _title;
   final String _endpoint;
+  final Future<String> Function(String) doRequest;
 
-  const SendHttpRequestWidget(this._title, this._endpoint, {Key key})
+  const SendHttpRequestWidget(this.doRequest, this._endpoint, {Key key})
       : super(key: key);
 
   @override
@@ -51,61 +50,65 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return StreamBuilder<String>(
         stream: responseStream.stream,
         builder: (context, snapshot) {
-          return Flex(
-            direction: Axis.vertical,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget._title,
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ),
-              Flex(
-                direction: Axis.horizontal,
-                children: [
-                  Flexible(
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                      child: TextField(
-                        onChanged: (value) {
-                          responseStream.add(value);
-                        },
-                        controller: TextEditingController()..text = widget._endpoint,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(), hintText: 'endpoint'),
+          return SingleChildScrollView(
+            child: Flex(
+              direction: Axis.vertical,
+              children: [
+                Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                        child: TextField(
+                          onChanged: (value) {
+                            responseStream.add(value);
+                          },
+                          controller: TextEditingController()
+                            ..text = widget._endpoint,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'endpoint'),
+                        ),
                       ),
                     ),
-                  ),
-                  MaterialButton(
-                    child: Text('Send'),
-                    onPressed: () async {
-                      setState(() {
-                        //responseText = '';
-                      });
+                    MaterialButton(
+                      child: Text('Send'),
+                      onPressed: () async {
+                        setState(() {
+                          responseStream.add('');
+                        });
 
-                      AirWatchHttpWorkAround httpWorkAroundClient =
-                          AirWatchWorkAroundFactory.getInstance();
-                      var request = dartHttp.Request(
-                          "GET", Uri.parse(widget._endpoint))
-                        ..headers.addAll({'content-type': 'application/json'});
-                      var response =
-                          await httpWorkAroundClient.doRequest(request);
-                      responseStream.add(response.body);
-                    },
-                  )
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                alignment: AlignmentDirectional.centerStart,
-                child: Text('response was $snapshot'),
-              )
-            ],
+                        var responseString =
+                            await widget.doRequest(widget._endpoint);
+                        print('response string: $responseString');
+                        responseStream.add(responseString);
+                      },
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    direction: Axis.horizontal,
+                    spacing: 8.0,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      Text(
+                        'response is',
+                        style: theme.textTheme.headline3,
+                      ),
+                      Text('${snapshot.data}'),
+                    ],
+                  ),
+                )
+              ],
+            ),
           );
         });
   }

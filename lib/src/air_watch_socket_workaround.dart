@@ -32,7 +32,7 @@ abstract class AirWatchHttpWorkAroundConfiguration {
 }
 
 class AirWatchWorkAroundFactory {
-  static getInstance({AirWatchHttpWorkAroundConfiguration config}) {
+  static AirWatchHttpWorkAround getInstance({AirWatchHttpWorkAroundConfiguration config}) {
     config = config ?? DefaultAirWatchHttpWorkAroundConfiguration();
     return AirWatchHttpRequestWorkAroundImpl(
         ContentTypeBasedHttpRequestBodyProviderFactory(), config);

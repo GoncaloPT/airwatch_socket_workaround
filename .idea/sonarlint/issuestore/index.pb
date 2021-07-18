@@ -11,16 +11,8 @@ e
 5ios/Classes/SwiftAirwatchSocketWorkaroundPlugin.swift,3/6/36a4c6513f0c85f6d2a0a21ac31e05b0d48d0bcc
 K
 lib/src/logger_factory.dart,f/a/fa3babc84b912b219905c88a90f4dbd973cb1ca4
-<
-CHANGELOG.md,a/b/ab09011fa121d0a2bb9fa4ca76094f2482b902b7
-7
-LICENSE,0/3/0398ccd0f49298b10a3d76a47800d2ebecd49859
-c
-3test/src/http/air_watch_socket_workaround_test.dart,8/b/8b9e4c8976c5f0e32abc0a5c667f57f9e9324f52
 e
 5lib/src/http/air_watch_socket_workaround_request.dart,8/d/8d3a8816b80e8a254370b1555fa2af09282a8473
-b
-2lib/src/http/air_watch_socket_workaround_impl.dart,6/d/6d26a7d7e81c90e4cf27a61c184946268b14941f
 Y
 )lib/src/websocket/airwatch_websocket.dart,8/c/8c638d03fe2ec6809678292250712141460653fe
 V

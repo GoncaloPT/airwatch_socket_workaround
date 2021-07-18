@@ -1,8 +1,7 @@
 name: airwatch_socket_workaround
 description: A workaround for AirWatch MDM Socket problem using dart sockets
 version: 0.0.1
-author: Gonçalo Silva (GoncaloPT)
-homepage:
+repository: https://github.com/GoncaloPT/airwatch_socket_workaround
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -17,6 +16,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  http_parser:
 
 flutter:
   plugin:

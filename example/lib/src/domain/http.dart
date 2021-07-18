@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:airwatch_socket_workaround/airwatch_socket_workaround.dart';
 import 'package:http/http.dart';
@@ -18,7 +18,7 @@ abstract class HttpClient {
 /// could be used, like - for example - receiving a configuration object
 class HttpClientFactory {
   HttpClient build() {
-    if (Platform.isIOS)
+    if (io.Platform.isIOS)
       return _AirWatchHttpClient(AirWatchWorkAroundFactory.getInstance());
     return _DartHttpClient();
   }

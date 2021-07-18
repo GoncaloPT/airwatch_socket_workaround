@@ -1,12 +1,19 @@
 import 'dart:async';
 
-import 'package:airwatch_socket_workaround/airwatch_socket_workaround.dart';
+import 'package:airwatch_socket_workaround_example/src/domain/http.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as dartHttp;
 
 class HttpTryoutWidget extends StatefulWidget {
-  const HttpTryoutWidget({Key key}) : super(key: key);
+  /// this is just for the sake of example, in real world scenario this would
+  /// probably be in a 'service' or such
+  final HttpClient _httpClient;
+
+  const HttpTryoutWidget(
+    this._httpClient, {
+    Key key,
+  }) : super(key: key);
 
   @override
   _HttpTryoutWidgetState createState() => _HttpTryoutWidgetState();
@@ -15,30 +22,23 @@ class HttpTryoutWidget extends StatefulWidget {
 class _HttpTryoutWidgetState extends State<HttpTryoutWidget> {
   var responseText = '';
   var endpoint = 'https://jsonplaceholder.typicode.com/todos/1';
-  var wsEndpoint = 'https://httpbin.org/anything';
 
   @override
   Widget build(BuildContext context) {
     return SendHttpRequestWidget(
       (String endpoint) async {
-        AirWatchHttpWorkAround httpWorkAroundClient =
-            AirWatchWorkAroundFactory.getInstance();
-        var request = dartHttp.Request("GET", Uri.parse(endpoint))
-          ..headers.addAll({'content-type': 'application/json'});
-        var response = await httpWorkAroundClient.doRequest(request);
-
+        var response = await widget._httpClient.get(endpoint);
         return '${response.body}';
       },
-      wsEndpoint,
     );
   }
 }
 
 class SendHttpRequestWidget extends StatefulWidget {
-  final String _endpoint;
+
   final Future<String> Function(String) doRequest;
 
-  const SendHttpRequestWidget(this.doRequest, this._endpoint, {Key key})
+  const SendHttpRequestWidget(this.doRequest,  {Key key})
       : super(key: key);
 
   @override
@@ -47,6 +47,7 @@ class SendHttpRequestWidget extends StatefulWidget {
 
 class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
   final StreamController<String> responseStream = StreamController();
+  var _endpoint= 'https://httpbin.org/anything';
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +68,10 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
                             EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                         child: TextField(
                           onChanged: (value) {
-                            responseStream.add(value);
+                            _endpoint = value;
                           },
                           controller: TextEditingController()
-                            ..text = widget._endpoint,
+                            ..text = _endpoint,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'endpoint'),
@@ -85,7 +86,7 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
                         });
 
                         var responseString =
-                            await widget.doRequest(widget._endpoint);
+                            await widget.doRequest(_endpoint);
                         print('response string: $responseString');
                         responseStream.add(responseString);
                       },

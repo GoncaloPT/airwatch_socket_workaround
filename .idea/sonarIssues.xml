@@ -23,6 +23,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/domain/http.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/domain/service.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/example/lib/src/http_multipart_example_widget.dart">
           <value>
             <set />
@@ -33,7 +43,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/presentation/http_tryout_widget.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/example/lib/src/ws_example_widget.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/example/pubspec.yaml">
           <value>
             <set />
           </value>

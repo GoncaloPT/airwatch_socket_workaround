@@ -17,3 +17,15 @@ K
 LICENSE,0/3/0398ccd0f49298b10a3d76a47800d2ebecd49859
 c
 3test/src/http/air_watch_socket_workaround_test.dart,8/b/8b9e4c8976c5f0e32abc0a5c667f57f9e9324f52
+e
+5lib/src/http/air_watch_socket_workaround_request.dart,8/d/8d3a8816b80e8a254370b1555fa2af09282a8473
+b
+2lib/src/http/air_watch_socket_workaround_impl.dart,6/d/6d26a7d7e81c90e4cf27a61c184946268b14941f
+Y
+)lib/src/websocket/airwatch_websocket.dart,8/c/8c638d03fe2ec6809678292250712141460653fe
+V
+&ios/airwatch_socket_workaround.podspec,8/2/823e2cbbaa88610fed504ce334a1ab38c603217a
+Z
+*ios/Classes/AirWatchSocketWorkAround.swift,e/0/e0ae9408f8eeff98bc61566a4ec6b8d2761e6c74
+X
+(ios/Classes/AirWatchHttpWorkAround.swift,9/c/9c96fe4bded745daa14662c743a54d4efd7bcbea

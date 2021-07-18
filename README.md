@@ -5,10 +5,11 @@ This plugin has been created to enable flutter apps to reach endpoints that are 
 ## Current status
 In development  
 ## TODO
-- provide simple Service example using custom HttpClient 
+- <s>provide simple example using custom HttpClient</s>
+- prepare for publishing
 - add examples for websocket 
 - add example for multipart post
-- prepare for publishing
+
 ## How to use it?
 Example provides 3 basic use cases:
 - HTTP GET

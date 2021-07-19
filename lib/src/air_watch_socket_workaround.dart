@@ -72,6 +72,14 @@ abstract class AirWatchWebSocketWorkAroundSession<T> {
   Future<void> close();
 }
 
+enum WebSocketSessionExceptionType {
+  unknownContentTypeFromServerMessage,
+  failureReceivingMessageFromSocket,
+  illegalArguments,
+  noSocketOrSocketClosed,
+  unmappedExceptionType
+}
+
 /// Used to obtain the body and encoding
 abstract class HttpRequestBodyProvider {
   /// Extracts the actual body from a subtype of [http.BaseRequest]

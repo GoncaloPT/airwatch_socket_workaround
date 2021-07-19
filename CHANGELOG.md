@@ -4,3 +4,6 @@
   websocket sessions.   
   Example only include HTTP GET call. Next version(s) will improve example project with other types
   of HTTP request and WS.
+
+## 0.0.2
+* Added exception mapping and propagation to websocket listen

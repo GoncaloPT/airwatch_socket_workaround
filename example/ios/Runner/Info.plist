@@ -26,6 +26,27 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSAppTransportSecurity</key>
+    	<dict>
+    		<key>NSAllowsArbitraryLoadsLocalNetworkOnly</key>
+    		<true/>
+    		<key>NSAllowsLocalNetworking</key>
+    		<true/>
+    		<key>NSExceptionDomains</key>
+    		<dict>
+    			<key>websocket.org</key>
+    			<dict>
+    				<key>NSAllowsArbitraryLoads</key>
+    				<true/>
+    				<key>NSExceptionRequiresForwardSecrecy</key>
+    				<false/>
+    				<key>NSIncludesSubdomains</key>
+    				<true/>
+    				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+    				<true/>
+    			</dict>
+    		</dict>
+    	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

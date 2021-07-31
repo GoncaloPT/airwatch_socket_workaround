@@ -25,9 +25,11 @@ class NativeWebSocketSession<T>
       {PlatformToWebSocketSessionExceptionMapper exceptionMapper =
           _defaultPlatformToWebSocketSessionExceptionMapper}) async {
     try {
+      _log.finest('create called for url $url');
       final eventChannelNameFinderMethodChanel = MethodChannel(_channelName);
       var evtChannelName = await eventChannelNameFinderMethodChanel
           .invokeMethod("createAndGetEventChannelName", {"url": url});
+      _log.fine('created event channel name is $evtChannelName');
       return NativeWebSocketSession._(
           eventChannelNameFinderMethodChanel, evtChannelName, exceptionMapper);
     } on Exception catch (error, stackstrace) {
@@ -49,7 +51,7 @@ class NativeWebSocketSession<T>
     _stream ??= EventChannel(_eventChannelName)
         .receiveBroadcastStream()
         .handleError((var error, var stackTrace) {
-      _log.warning('Error from native socket $error');
+      _log.severe('Error from native socket $error');
       if (error is PlatformException) {
         throw _exceptionMapper(error);
       }
@@ -101,6 +103,11 @@ class WebSocketSessionException implements Exception {
 
   WebSocketSessionException(this.type,
       {this.message, this.details, this.stacktrace});
+
+  @override
+  String toString() {
+    return 'WebSocketSessionException{type: $type, message: $message, details: $details, stacktrace: $stacktrace}';
+  }
 }
 
 /// Translates between [PlatformException] and [WebSocketSessionException]

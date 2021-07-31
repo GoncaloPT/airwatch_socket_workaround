@@ -8,6 +8,7 @@ In development
 - <s>provide simple example using custom HttpClient</s>
 - <s>prepare for publishing</s>
 - add examples for websocket 
+- null safety
 - add example for multipart post
 - provide HLD
 

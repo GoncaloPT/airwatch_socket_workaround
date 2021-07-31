@@ -9,8 +9,6 @@ W
 'ios/Classes/Multipart/DataHelpers.swift,e/c/ec71551e21129e86b4847735b4f56372eda0e2bb
 e
 5ios/Classes/SwiftAirwatchSocketWorkaroundPlugin.swift,3/6/36a4c6513f0c85f6d2a0a21ac31e05b0d48d0bcc
-K
-lib/src/logger_factory.dart,f/a/fa3babc84b912b219905c88a90f4dbd973cb1ca4
 e
 5lib/src/http/air_watch_socket_workaround_request.dart,8/d/8d3a8816b80e8a254370b1555fa2af09282a8473
 V

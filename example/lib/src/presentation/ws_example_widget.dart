@@ -1,6 +1,7 @@
 import 'package:airwatch_socket_workaround/airwatch_socket_workaround.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class WsExampleWidget extends StatefulWidget {
   const WsExampleWidget({Key key}) : super(key: key);
@@ -10,6 +11,7 @@ class WsExampleWidget extends StatefulWidget {
 }
 
 class _WsExampleWidgetState extends State<WsExampleWidget> {
+  var _log = Logger("_WsExampleWidgetState");
   var responses = <String>[];
   var _textToSend = 'hello';
 
@@ -20,6 +22,7 @@ class _WsExampleWidgetState extends State<WsExampleWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return FutureBuilder(
         future: AirWatchWorkAroundFactory.getInstanceSocketSession<String>(
             "wss://echo.websocket.org"),
@@ -33,50 +36,61 @@ class _WsExampleWidgetState extends State<WsExampleWidget> {
           return StreamBuilder(
               stream: wsStream.receiveBroadcastStream(),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (snapshot.hasError) {
+                  _log.warning("error on stream: ${snapshot.error}");
+                }
                 print('building ${snapshot.hasData}');
                 if (snapshot.hasData) {
-                  responses.add(snapshot.data);
+                  responses.add('response: ${snapshot.data}');
                 }
-                return Column(children: [
-                  Flex(
-                    direction: Axis.horizontal,
-                    children: [
-                      Flexible(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                          child: TextField(
-                            onChanged: (value) {
-                              setState(() {
-                                _textToSend = value;
-                              });
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    Text(
 
-                            },
-                            controller: TextEditingController()
-                              ..text = _textToSend,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'text to send'),
+                      "This widget is using echo websocket.\n"
+                      "Enter the text you and to send and press send.\n"
+                      "After sending you should se bellow the "
+                      "response from the echo service",
+                      style: theme.textTheme.headline6,
+                      textAlign: TextAlign.start,
+                    ),
+                    Flex(
+                      direction: Axis.horizontal,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 16),
+                            child: TextField(
+                              onChanged: (value) {
+                                _textToSend = value;
+                              },
+                              controller: TextEditingController()
+                                ..text = _textToSend,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'text to send'),
+                            ),
                           ),
                         ),
-                      ),
-                      MaterialButton(
-                        child: Text('Send'),
-                        onPressed: () async {
-                          print('Send called!!');
-                          wsStream.send(_textToSend);
-                        },
-                      )
-                    ],
-                  ),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => Text(responses[index]),
-                    itemCount: responses.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        Divider(),
-                  ),
-                ]);
+                        RaisedButton(
+                          child: Text('Send'),
+                          onPressed: () async {
+                            wsStream.send(_textToSend);
+                          },
+                        )
+                      ],
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => Text(responses[index]),
+                      itemCount: responses.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          Divider(),
+                    ),
+                  ]),
+                );
               });
         });
   }

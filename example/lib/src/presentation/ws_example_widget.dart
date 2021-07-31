@@ -47,7 +47,6 @@ class _WsExampleWidgetState extends State<WsExampleWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(children: [
                     Text(
-
                       "This widget is using echo websocket.\n"
                       "Enter the text you and to send and press send.\n"
                       "After sending you should se bellow the "

@@ -35,11 +35,9 @@ class _HttpTryoutWidgetState extends State<HttpTryoutWidget> {
 }
 
 class SendHttpRequestWidget extends StatefulWidget {
-
   final Future<String> Function(String) doRequest;
 
-  const SendHttpRequestWidget(this.doRequest,  {Key key})
-      : super(key: key);
+  const SendHttpRequestWidget(this.doRequest, {Key key}) : super(key: key);
 
   @override
   _SendHttpRequestWidgetState createState() => _SendHttpRequestWidgetState();
@@ -47,7 +45,7 @@ class SendHttpRequestWidget extends StatefulWidget {
 
 class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
   final StreamController<String> responseStream = StreamController();
-  var _endpoint= 'https://httpbin.org/anything';
+  var _endpoint = 'https://httpbin.org/anything';
 
   @override
   Widget build(BuildContext context) {
@@ -70,8 +68,7 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
                           onChanged: (value) {
                             _endpoint = value;
                           },
-                          controller: TextEditingController()
-                            ..text = _endpoint,
+                          controller: TextEditingController()..text = _endpoint,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'endpoint'),
@@ -85,8 +82,7 @@ class _SendHttpRequestWidgetState extends State<SendHttpRequestWidget> {
                           responseStream.add('');
                         });
 
-                        var responseString =
-                            await widget.doRequest(_endpoint);
+                        var responseString = await widget.doRequest(_endpoint);
                         print('response string: $responseString');
                         responseStream.add(responseString);
                       },

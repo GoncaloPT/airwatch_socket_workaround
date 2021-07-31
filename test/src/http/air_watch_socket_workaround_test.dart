@@ -45,8 +45,8 @@ void main() {
           ..['statusCode'] = 200
           ..['data'] = '';
       });
-      var response = await airWatchSocketWorkAround
-          .doRequest(Request('GET', Uri.parse('http://localhost:8080'))..body= "{}");
+      var response = await airWatchSocketWorkAround.doRequest(
+          Request('GET', Uri.parse('http://localhost:8080'))..body = "{}");
       expect(response.statusCode, 200);
     });
 

@@ -7,3 +7,7 @@
 
 ## 0.0.2
 * Added exception mapping and propagation to websocket listen
+
+## 0.0.3 ( unreleased )
+* Added example for websocket usage and logs capture 
+* Added some more logs on airwatch_socket_workaround

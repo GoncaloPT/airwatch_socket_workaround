@@ -32,14 +32,16 @@ abstract class AirWatchHttpWorkAroundConfiguration {
 }
 
 class AirWatchWorkAroundFactory {
-  static AirWatchHttpWorkAround getInstance({AirWatchHttpWorkAroundConfiguration config}) {
+  static AirWatchHttpWorkAround getInstance(
+      {AirWatchHttpWorkAroundConfiguration config}) {
     config = config ?? DefaultAirWatchHttpWorkAroundConfiguration();
     return AirWatchHttpRequestWorkAroundImpl(
         ContentTypeBasedHttpRequestBodyProviderFactory(), config);
   }
 
-  static Future<AirWatchWebSocketWorkAroundSession<T>> getInstanceSocketSession<T>(String url,
-      {AirWatchHttpWorkAroundConfiguration config}) async {
+  static Future<AirWatchWebSocketWorkAroundSession<T>>
+      getInstanceSocketSession<T>(String url,
+          {AirWatchHttpWorkAroundConfiguration config}) async {
     config = config ?? DefaultAirWatchHttpWorkAroundConfiguration();
     return await NativeWebSocketSession.create<T>(url);
   }

@@ -3,6 +3,21 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="$PROJECT_DIR$/../../TCube/dsmp-mobile/features/authentication/lib/src/presentation/screen/login_webview.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../TCube/dsmp-mobile/features/infrastructure/lib/src/http/websocket/native_websocket.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../TCube/dsmp-mobile/features/infrastructure/lib/src/http/websocket/websocket_factory.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/.github/workflows/publish.yml">
           <value>
             <set />

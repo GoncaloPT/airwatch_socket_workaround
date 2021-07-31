@@ -1,4 +1,7 @@
 name: airwatch_socket_workaround_example
+version: 0.0.1
+authors:
+  - GoncaloPT
 description: Demonstrates how to use the airwatch_socket_workaround plugin.
 
 # The following line prevents the package from being accidentally published to
@@ -15,8 +18,6 @@ dependencies:
     path: ../
   http: 0.12.2
   logging: ^0.11.4
-
-
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

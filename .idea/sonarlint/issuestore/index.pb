@@ -17,17 +17,9 @@ V
 &ios/airwatch_socket_workaround.podspec,8/2/823e2cbbaa88610fed504ce334a1ab38c603217a
 X
 (ios/Classes/AirWatchHttpWorkAround.swift,9/c/9c96fe4bded745daa14662c743a54d4efd7bcbea
-S
-#lib/airwatch_socket_workaround.dart,b/1/b1a6c05ca08da456aa3a808fdfe45a234191e2dd
-D
-example/pubspec.yaml,a/3/a35abf1447e056db5184cc974e2d936424f18658
-o
-?example/lib/src/presentation/http_multipart_example_widget.dart,f/2/f2af549876f3ffc0d1312793a614a76fc1ce63a2
-c
-3example/lib/src/presentation/ws_example_widget.dart,c/4/c4fdc3d0cc434264993a2d809cff596f5d229c7e
-d
-4example/lib/src/presentation/http_tryout_widget.dart,7/b/7bc5ddfc5954d27e7f5e16e983af8b7057553102
-E
-example/lib/main.dart,8/5/853a9041dcf81c03edb44066add69a52af9f9b1f
 7
 LICENSE,0/3/0398ccd0f49298b10a3d76a47800d2ebecd49859
+P
+ example/lib/src/domain/http.dart,9/c/9c5b23ed25e305e02a255a04abaf73220bd27180
+b
+2lib/src/http/air_watch_socket_workaround_impl.dart,6/d/6d26a7d7e81c90e4cf27a61c184946268b14941f

@@ -6,7 +6,7 @@ This plugin has been created to enable flutter apps to reach endpoints that are 
 In development  
 ## TODO
 - <s>provide simple example using custom HttpClient</s>
-- prepare for publishing
+- <s>prepare for publishing</s>
 - add examples for websocket 
 - add example for multipart post
 - provide HLD
@@ -47,6 +47,13 @@ Trying to get the current system proxy DO NOT WORK, since the system proxy is al
 
 ### Is there already a bug for this?
 An issue exists in flutter: https://github.com/flutter/flutter/issues/41500
+
+## Plugin development
+
+### Actions
+- **Build** action is described in .github/workflows/build.yml, it executes `flutter pub get` and `flutter test` commands
+- **Publish** _(NOT WORKING)_ action is described in .github/workflows/public.yml. Currently is not working since i do not wish to upload my personal google credentials to a github secret.
+
 
 
 

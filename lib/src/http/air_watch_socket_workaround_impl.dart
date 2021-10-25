@@ -4,6 +4,7 @@ import 'package:airwatch_socket_workaround/src/logger_factory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../../airwatch_socket_workaround.dart';
 
@@ -57,8 +58,9 @@ class AirWatchHttpRequestWorkAroundImpl implements AirWatchHttpWorkAround {
     }
 
     var statusCode = data["statusCode"] ?? 0;
+
     return http.Response.bytes(
-        bodyProvider.getEncoding(request).encode(data["data"] ?? ''),
+        data["data"] ?? utf8.encode(''),
         statusCode > 100 ? statusCode : 500,
         headers: headers,
         request: request);

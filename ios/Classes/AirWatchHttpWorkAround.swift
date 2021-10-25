@@ -84,7 +84,7 @@ public class AirWatchHttpWorkAround: NSObject {
             }
             else{
                 result([
-                    "data": String(data: data!, encoding: .utf8)!,
+                    "data": data!,
                     "statusCode": (response as? HTTPURLResponse)?.statusCode,
                     "headers": (response as? HTTPURLResponse)?.allHeaderFields as NSDictionary? as! [String:String]?
                 ]);

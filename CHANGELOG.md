@@ -11,3 +11,7 @@
 ## 0.0.3 ( unreleased )
 * Added example for websocket usage and logs capture 
 * Added some more logs on airwatch_socket_workaround
+* Native side of http request workaround will now always return a byte array instead of a string. Dart side was adapted 
+* be prepared for that.
+
+## 0.0.4 ( unreleased )

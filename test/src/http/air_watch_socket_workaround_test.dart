@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 
+
 /// Tests for the air_watch_socket_workaround.dart classes.
 /// These are unit test, not integration tests.
 /// Therefore the actual MethodChannel is mocked, which means
@@ -32,7 +33,7 @@ void main() {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = '';
+          ..['data'] = utf8.encode('');
       });
       var response = await airWatchSocketWorkAround
           .doRequest(Request('GET', Uri.parse('http://localhost:8080')));
@@ -43,7 +44,7 @@ void main() {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = '';
+          ..['data'] = utf8.encode('');
       });
       var response = await airWatchSocketWorkAround.doRequest(
           Request('GET', Uri.parse('http://localhost:8080'))..body = "{}");
@@ -63,7 +64,7 @@ void main() {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = '';
+          ..['data'] = utf8.encode('');
       });
       var response = await airWatchSocketWorkAround
           .doRequest(Request('GET', Uri.parse('http://localhost:8080')));
@@ -90,7 +91,7 @@ void main() {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = jsonDecode(methodCall.arguments['body']);
+          ..['data'] = utf8.encode(jsonDecode(methodCall.arguments['body']));
       });
 
       var request = Request('GET', Uri.parse('http://localhost:8080/'))
@@ -137,7 +138,7 @@ void main() {
         print(methodCall.arguments);
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = utf8.decode(methodCall.arguments['body']);
+          ..['data'] = methodCall.arguments['body'];
       });
       var request = Request('GET', Uri.parse('http://localhost:8080/'))
         ..bodyBytes = utf8.encode(dummyMethodCallResponse)
@@ -167,7 +168,7 @@ void main() {
         print(methodCall.arguments);
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = '[]';
+          ..['data'] = utf8.encode('[]');
       });
       var request = MultipartRequest('GET', Uri.parse('http://localhost:8080/'))
         ..files.add(dummyMethodCallResponse)

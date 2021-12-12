@@ -35,8 +35,7 @@ class AirWatchWorkAroundFactory {
   static AirWatchHttpWorkAround getInstance(
       {AirWatchHttpWorkAroundConfiguration config}) {
     config = config ?? DefaultAirWatchHttpWorkAroundConfiguration();
-    return AirWatchHttpRequestWorkAroundImpl(
-        ContentTypeBasedHttpRequestBodyProviderFactory(), config);
+    return AirWatchHttpRequestWorkAroundImpl(HttpRequestBodyProviderImpl(), config);
   }
 
   static Future<AirWatchWebSocketWorkAroundSession<T>>
@@ -95,6 +94,8 @@ abstract class HttpRequestBodyProvider {
 /// body type of the request.
 /// This information will be then used by the native side of the plugin to
 /// build the actual Request
+/// Note: To be removed on the next version, everything can be a
+@deprecated
 abstract class HttpRequestBodyProviderFactory {
   HttpRequestBodyProvider build(ContentType contentType);
 }

@@ -21,7 +21,7 @@ void main() {
 
   group('implementation resilience', () {
     var airWatchSocketWorkAround = AirWatchHttpRequestWorkAroundImpl(
-      ContentTypeBasedHttpRequestBodyProviderFactory(),
+      HttpRequestBodyProviderImpl(),
       defaultConfig,
     );
 
@@ -74,7 +74,7 @@ void main() {
 
   group('send String body', () {
     var airWatchSocketWorkAround = AirWatchHttpRequestWorkAroundImpl(
-      ContentTypeBasedHttpRequestBodyProviderFactory(),
+      HttpRequestBodyProviderImpl(),
       defaultConfig,
     );
     var dummyMethodCallResponseData = '''{
@@ -91,11 +91,11 @@ void main() {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
         return methodCall.arguments
           ..['statusCode'] = 200
-          ..['data'] = utf8.encode(jsonDecode(methodCall.arguments['body']));
+          ..['data'] = methodCall.arguments['body'];
       });
 
       var request = Request('GET', Uri.parse('http://localhost:8080/'))
-        ..body = jsonEncode(dummyMethodCallResponseData)
+        ..bodyBytes = utf8.encode(dummyMethodCallResponseData)
         ..encoding = utf8
         ..headers.addAll({'Content-Type': contentType.value});
 
@@ -115,7 +115,7 @@ void main() {
       });
 
       var request = Request('GET', Uri.parse('http://localhost:8080/'))
-        ..body = jsonEncode(dummyMethodCallResponseData)
+        ..bodyBytes = utf8.encode(dummyMethodCallResponseData)
         ..encoding = utf8
         ..headers.addAll({'Content-Type': contentType.value});
 
@@ -127,7 +127,7 @@ void main() {
 
   group('send byte array', () {
     var airWatchSocketWorkAround = AirWatchHttpRequestWorkAroundImpl(
-      ContentTypeBasedHttpRequestBodyProviderFactory(),
+      HttpRequestBodyProviderImpl(),
       defaultConfig,
     );
     var contentType = ContentType.binary;
@@ -153,7 +153,7 @@ void main() {
     var data = utf8.encode("ola");
     var contentType = ContentType.binary;
     var airWatchSocketWorkAround = AirWatchHttpRequestWorkAroundImpl(
-      ContentTypeBasedHttpRequestBodyProviderFactory(),
+      HttpRequestBodyProviderImpl(),
       defaultConfig,
     );
 

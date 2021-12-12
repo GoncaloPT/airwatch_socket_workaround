@@ -281,20 +281,13 @@ class SingleBodyRawHttpRequest: HttpRequestData{
 
 /// Factory for [HttpRequestData] instances
 /// Current implemention uses content-type header to infer what is the right [HttpRequestData] instance
+/// Since version 0.0.3 everything is a "raw" request, therefore we don't need diferent HttpRequestDataFactory anymore
 class HttpRequestDataFactory{
     func build(args: NSDictionary!) throws -> HttpRequestData   {
         let headers = args["headers"] as! NSDictionary
         let contentTypeHeader = (headers["content-type"] as? String) ?? (headers["Content-Type"] as? String);
         // for byte array body
         os_log("HttpRequestDataFactory: build HttpRequestData for contentType %@",log: OSLog.airWatchWorkaroundHttpClient,type: .info,  String(describing: contentTypeHeader))
-        if( contentTypeHeader != nil && contentTypeHeader!.contains("application/json")){
-            os_log("HttpRequestDataFactory: returning SingleBodyStringHttpRequest",log: OSLog.airWatchWorkaroundHttpClient,type: .info)
-            return try SingleBodyStringHttpRequest.buildFromArguments(args: args)
-        }
-//        else if (  contentTypeHeader != nil && contentTypeHeader!.contains("multipart/form-data")){
-//            os_log("HttpRequestDataFactory: returning MultiPartHttpRequest",log: OSLog.airWatchWorkaroundHttpClient,type: .info)
-//            return try MultiPartHttpRequest.buildFromArguments(args: args)
-//        }
         os_log("HttpRequestDataFactory: returning SingleBodyRawHttpRequest",log: OSLog.airWatchWorkaroundHttpClient,type: .info)
         return try SingleBodyRawHttpRequest.buildFromArguments(args: args)
         

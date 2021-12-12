@@ -6,7 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import '../air_watch_socket_workaround.dart';
 
+/// To be removed on the next version
+/// Use [HttpRequestBodyProviderImpl] directly
 @visibleForTesting
+@deprecated
 class ContentTypeBasedHttpRequestBodyProviderFactory
     implements HttpRequestBodyProviderFactory {
   HttpRequestBodyProvider build(ContentType contentType) {
@@ -17,13 +20,13 @@ class ContentTypeBasedHttpRequestBodyProviderFactory
       case "audio":
       case "video":
       case "image":
-        return RawBodyProvider();
+        return HttpRequestBodyProviderImpl();
       case "multipart":
         return MultipartBodyProvider();
       case "application":
         if (subType == 'json') return StringBodyProvider();
 
-        return RawBodyProvider();
+        return HttpRequestBodyProviderImpl();
       case "text":
         return StringBodyProvider();
       default:
@@ -34,7 +37,10 @@ class ContentTypeBasedHttpRequestBodyProviderFactory
   }
 }
 
+/// To be removed on the next version
+/// Use [HttpRequestBodyProviderImpl] directly
 @visibleForTesting
+@deprecated
 class MultipartBodyProvider implements HttpRequestBodyProvider {
   @override
   Future<String> getBody(BaseRequest request) async {
@@ -62,7 +68,10 @@ class MultipartBodyProvider implements HttpRequestBodyProvider {
   }
 }
 
+/// To be removed on the next version
+/// Use [HttpRequestBodyProviderImpl] directly
 @visibleForTesting
+@deprecated
 class StringBodyProvider implements HttpRequestBodyProvider {
   @override
   Future<String> getBody(BaseRequest request) async {
@@ -85,12 +94,20 @@ class StringBodyProvider implements HttpRequestBodyProvider {
   }
 }
 
+/// Unified implementation of [HttpRequestBodyProvider]
+/// since in the past we had an implementation for different request body types:
+/// for String, Multipart and 'raw'.
+/// This implementation should be enough for all since it will delegate
+/// the conversion of the body to [BaseRequest] and descendants
 @visibleForTesting
-class RawBodyProvider implements HttpRequestBodyProvider {
+class HttpRequestBodyProviderImpl implements HttpRequestBodyProvider {
   @override
   Future<Uint8List> getBody(BaseRequest request) async {
     if (request is Request) {
       return request.bodyBytes;
+    }
+    if (request is MultipartRequest) {
+      return request.finalize().toBytes();
     } else {
       throw ArgumentError(
           'Provided request is not a valid one with a Raw bytes body');
@@ -108,6 +125,9 @@ class RawBodyProvider implements HttpRequestBodyProvider {
   }
 }
 
+/// To be removed on the next version
+/// No longer needed since the introduction of [HttpRequestBodyProviderImpl]
+@deprecated
 class MultipartMessage {
   /// The name of the form field.
   final String name;

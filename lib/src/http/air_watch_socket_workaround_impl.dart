@@ -19,10 +19,10 @@ class AirWatchHttpRequestWorkAroundImpl implements AirWatchHttpWorkAround {
   static const defaultPlatform = const MethodChannel(_httpChannelName);
 
   final MethodChannel platform;
-  final HttpRequestBodyProviderFactory _bodyProviderFactory;
+  final HttpRequestBodyProvider _bodyProvider;
   final AirWatchHttpWorkAroundConfiguration _config;
 
-  AirWatchHttpRequestWorkAroundImpl(this._bodyProviderFactory, this._config,
+  AirWatchHttpRequestWorkAroundImpl(this._bodyProvider, this._config,
       {this.platform = defaultPlatform});
 
   @override
@@ -37,8 +37,7 @@ class AirWatchHttpRequestWorkAroundImpl implements AirWatchHttpWorkAround {
     final contentType = requestContentType != null
         ? ContentType.parse(requestContentType)
         : _config.defaultContentType;
-    var bodyProvider = _bodyProviderFactory.build(contentType);
-    var body = await bodyProvider.getBody(request);
+    var body = await _bodyProvider.getBody(request);
 
     Map data = await platform.invokeMethod('doRequest', {
       "url": request.url.toString(),

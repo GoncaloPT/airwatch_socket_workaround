@@ -83,6 +83,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/example/lib/src/presentation/ws_example_widget.dart">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/example/lib/src/ws_example_widget.dart">
           <value>
             <set />

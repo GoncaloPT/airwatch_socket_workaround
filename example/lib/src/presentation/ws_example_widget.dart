@@ -25,7 +25,7 @@ class _WsExampleWidgetState extends State<WsExampleWidget> {
     var theme = Theme.of(context);
     return FutureBuilder(
         future: AirWatchWorkAroundFactory.getInstanceSocketSession<String>(
-            "wss://echo.websocket.org"),
+            "wss://echo.websocket.events"),
         builder: (BuildContext context,
             AsyncSnapshot<AirWatchWebSocketWorkAroundSession<String>>
                 snapshot) {

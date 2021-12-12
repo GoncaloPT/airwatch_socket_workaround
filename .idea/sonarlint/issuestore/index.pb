@@ -32,7 +32,5 @@ M
 example/ios/Runner/Info.plist,e/2/e2dc4e679c0be3a65fc5cd78a18842267605151a
 S
 #lib/airwatch_socket_workaround.dart,b/1/b1a6c05ca08da456aa3a808fdfe45a234191e2dd
-Y
-)lib/src/websocket/airwatch_websocket.dart,8/c/8c638d03fe2ec6809678292250712141460653fe
 E
 example/lib/main.dart,8/5/853a9041dcf81c03edb44066add69a52af9f9b1f

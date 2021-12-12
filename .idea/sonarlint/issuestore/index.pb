@@ -22,12 +22,8 @@ M
 .github/workflows/publish.yml,4/6/4639989a2b9ca33671669f3e377b9d0308553f80
 K
 .github/workflows/build.yml,f/e/fe77d5d1439f26e353a42bbd38dece2467ff6558
-D
-example/pubspec.yaml,a/3/a35abf1447e056db5184cc974e2d936424f18658
 o
 ?example/lib/src/presentation/http_multipart_example_widget.dart,f/2/f2af549876f3ffc0d1312793a614a76fc1ce63a2
-d
-4example/lib/src/presentation/http_tryout_widget.dart,7/b/7bc5ddfc5954d27e7f5e16e983af8b7057553102
 K
 lib/src/logger_factory.dart,f/a/fa3babc84b912b219905c88a90f4dbd973cb1ca4
 H
@@ -36,5 +32,5 @@ M
 example/ios/Runner/Info.plist,e/2/e2dc4e679c0be3a65fc5cd78a18842267605151a
 S
 #lib/airwatch_socket_workaround.dart,b/1/b1a6c05ca08da456aa3a808fdfe45a234191e2dd
-Y
-)lib/src/websocket/airwatch_websocket.dart,8/c/8c638d03fe2ec6809678292250712141460653fe
+E
+example/lib/main.dart,8/5/853a9041dcf81c03edb44066add69a52af9f9b1f

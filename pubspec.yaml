@@ -1,6 +1,6 @@
 name: airwatch_socket_workaround
 description: A workaround for AirWatch MDM Socket problem using dart sockets
-version: 0.0.3
+version: 0.0.4
 repository: https://github.com/GoncaloPT/airwatch_socket_workaround
 
 environment:

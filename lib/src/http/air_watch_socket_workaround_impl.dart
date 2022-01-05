@@ -59,11 +59,15 @@ class AirWatchHttpRequestWorkAroundImpl implements AirWatchHttpWorkAround {
 
     var statusCode = data["statusCode"] ?? 0;
 
+    if (data["data"] is String) {
+      return http.Response(
+          data["data"] ?? '', statusCode > 100 ? statusCode : 500,
+          headers: headers, request: request);
+    }
+
     return http.Response.bytes(
-        data["data"] ?? utf8.encode(''),
-        statusCode > 100 ? statusCode : 500,
-        headers: headers,
-        request: request);
+        data["data"] ?? utf8.encode(''), statusCode > 100 ? statusCode : 500,
+        headers: headers, request: request);
   }
 }
 
